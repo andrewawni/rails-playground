@@ -35,3 +35,5 @@ module TodoApi
     config.api_only = true
   end
 end
+
+Mongoid.load!('config/mongoid.yml')

@@ -26,7 +26,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
-
+  gem 'rubocop', require: false
 end
 
 group :development do
@@ -40,8 +40,9 @@ end
 group :test do 
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
+  gem 'mongoid-rspec'
   gem 'faker'
-  gem 'database_cleaner'
+  gem 'database_cleaner-mongoid'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
