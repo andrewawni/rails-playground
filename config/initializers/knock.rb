@@ -55,6 +55,7 @@ Knock.setup do |config|
   ## Configure the exception to be used when user cannot be found.
   ##
   ## Default:
-  # config.not_found_exception_class_name = 'ActiveRecord::RecordNotFound'
+  config.not_found_exception_class_name = 'Mongoid::Errors::InvalidFind'
   config.token_secret_signature_key = -> { Rails.application.credentials.fetch(:secret_key_base) }
+  
 end

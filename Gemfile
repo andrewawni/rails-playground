@@ -20,11 +20,15 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-gem 'mongoid'
-gem 'knock'
 gem 'bcrypt'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'jwt'
+gem 'knock'
+gem 'mongoid'
 gem 'rack-cors'
+
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
  
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

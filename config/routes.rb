@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     post '/signup', to: 'users#create'
    end
 
-  resources :users
+  resources :users do
+    get :avatar, on: :member
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :todos do
     resources :items

@@ -4,9 +4,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
-
-    render json: @users
+    render json: @user
   end
 
   # GET /users/1
@@ -42,11 +40,11 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = current_user
     end
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :password, :password_confirmation, :avatar)
     end
 end
