@@ -1,6 +1,46 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'swagger_helper'
+
+describe 'Todos API' do
+
+  let!(:user) { create(:user) }
+  let!(:user_todos) { create_list(:todo, 10, user: user) }
+  let(:todo_id) { user.todos.first.id }
+  let(:token) do
+    Knock::AuthToken.new(payload: { sub: user.id }).token
+  end
+
+  path '/todos' do
+    post 'Creates a todo' do
+      tags 'Todos'
+      security [bearer: []]
+      consumes 'application/json'
+      parameter name: :todo, in: :body, schema: {
+        type: :object,
+        properties: {
+          title: { type: :string }
+        },
+        required: ['title']
+      }
+      parameter name: :Authorization, in: :header, type: :string
+
+      response '201', 'todo created' do
+        let(:todo) { { title: 'foo'} }
+        let(:Authorization) { "Bearer #{token}" }
+        run_test!
+      end
+
+      response '401', 'authentication failed' do
+        let(:todo) { { title: 'foo'} }
+        let(:Authorization) { "Bearer hehehehe" }
+        run_test!
+      end
+
+    end
+  end
+end
 
 RSpec.describe '/todos', type: :request do
   let!(:user) { create(:user) }

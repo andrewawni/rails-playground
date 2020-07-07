@@ -106,6 +106,8 @@ RSpec.describe "/users", type: :request do
     end
 
     context "with invalid parameters" do
+      rake rswag:specs:swaggerize
+      rake rswag:specs:swaggerize
       it "renders a JSON response with errors for the user" do
         user = User.create! valid_attributes
         patch user_url(user),
