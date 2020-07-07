@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class TodosController < ApplicationController
   before_action :authenticate_user
-  before_action :set_todo, only: [:show, :update, :destroy]
+  before_action :set_todo, only: %i[show update destroy]
   # GET /todos
   def index
     @todos = current_user.todos
@@ -16,6 +18,13 @@ class TodosController < ApplicationController
   # GET /todos/:id
   def show
     json_response(@todo)
+  end
+
+  def search
+    q = '*'
+    q = params[:query] if params[:query].present?
+    @todos = Todo.search(q).records.to_a
+    json_response(@todos, 200)
   end
 
   # PUT /todos/:id
@@ -34,7 +43,7 @@ class TodosController < ApplicationController
 
   def todo_params
     # whitelist params
-    params.require(:todo).permit(:title)
+    params.require(:todo).permit(:title, :description)
   end
 
   def set_todo
