@@ -9,7 +9,7 @@ class Todo
   belongs_to :user
 
   validates_presence_of :title
-  def as_indexed_json()
+  def as_indexed_json(options={})
     as_json(except: [:id, :_id])
   end
 end
